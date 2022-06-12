@@ -1,0 +1,7 @@
+*.iml
+.idea/$CACHE_FILE$
+.idea/
+logs/
+*.jar
+*/target/*
+**/target/

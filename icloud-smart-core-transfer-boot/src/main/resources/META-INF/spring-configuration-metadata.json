@@ -1,0 +1,75 @@
+{
+  "groups": [
+    {
+      "name": "transfer-service",
+      "type": "com.yijianguanzhu.transfer.common.props.TransferProperties",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "transfer-service.port",
+      "type": "java.lang.Integer",
+      "description": "server绑定端口",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties",
+      "defaultValue": 6014
+    },
+    {
+      "name": "transfer-service.session.keepalive-interval",
+      "type": "java.lang.Long",
+      "description": "会话保活间隔（单位/秒）",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$SessionProperties",
+      "defaultValue": 45
+    },
+    {
+      "name": "transfer-service.time-wheel.keepalive-interval",
+      "type": "java.lang.Long",
+      "description": "心跳检查间隔（单位/秒）",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$TimeWheelProperties",
+      "defaultValue": 45
+    },
+    {
+      "name": "transfer-service.time-wheel.max-keepalive-interval",
+      "type": "java.lang.Long",
+      "description": "最大心跳离线时间（单位/秒）",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$TimeWheelProperties",
+      "defaultValue": 120
+    },
+    {
+      "name": "transfer-service.core.boss-thread",
+      "type": "java.lang.Integer",
+      "description": "netty boss线程数",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$CoreProperties",
+      "defaultValue": "cpu核心线程数"
+    },
+    {
+      "name": "transfer-service.core.worker-thread",
+      "type": "java.lang.Integer",
+      "description": "netty workerThread线程数",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$CoreProperties",
+      "defaultValue": "boss-thread*2"
+    },
+    {
+      "name": "transfer-service.core.handshake-timeout",
+      "type": "java.lang.Long",
+      "description": "websocket握手超时时间（单位/毫秒）",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$CoreProperties",
+      "defaultValue": 5000
+    },
+    {
+      "name": "transfer-service.core.max-frame-payload-length",
+      "type": "java.lang.Integer",
+      "description": "websocket 最大负载（单位/字节）",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$CoreProperties",
+      "defaultValue": "60 * 1024 * 1024"
+    },
+    {
+      "name": "transfer-service.cluster.rabbit.enable",
+      "type": "java.lang.Boolean",
+      "description": "是否启用rabbit作为消息队列",
+      "sourceType": "com.yijianguanzhu.transfer.common.props.TransferProperties$RabbitProperties",
+      "defaultValue": "false"
+    }
+  ],
+  "hints": []
+}

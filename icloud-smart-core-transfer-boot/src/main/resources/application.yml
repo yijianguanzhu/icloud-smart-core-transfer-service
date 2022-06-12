@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: transfer-service
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: log
+  cloud:
+    # 开启断路器功能，默认开启
+    circuit:
+      breaker:
+        enabled: true
+
+# 开启feign client熔断降级
+feign:
+  hystrix:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 300
+      maxQueueSize: 1000
+      queueSizeRejectionThreshold: 800
+  command:
+    default:
+      execution:
+        timeout:
+          # 是否开始超时熔断，如果为false，则熔断机制只在服务不可用时开启
+          enabled: true
+        isolation:
+          thread:
+            # 设置超时熔断时间，默认为1000毫秒 @see com.netflix.hystrix.HystrixCommandProperties
+            timeoutInMilliseconds: 5000
+
+#ribbon配置
+ribbon:
+  #对当前实例的重试次数
+  MaxAutoRetries: 1
+  #切换实例的重试次数
+  MaxAutoRetriesNextServer: 2
+  #请求处理的超时时间
+  ReadTimeout: 2000
+  #请求连接的超时时间
+  ConnectTimeout: 2000
+  #对所有操作请求都进行重试
+  OkToRetryOnAllOperations: true
+
+logging:
+  config: classpath:logback-spring.xml

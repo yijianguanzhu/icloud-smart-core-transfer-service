@@ -1,0 +1,14 @@
+#nacos配置
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:http://127.0.0.1:8848}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+      config:
+        server-addr: ${NACOS_ADDR:http://127.0.0.1:8848}
+        prefix: ${NACOS_CONFIG_PREFIX:icloud}
+        file-extension: ${NACOS_CONFIG_FORMAT:yaml}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}

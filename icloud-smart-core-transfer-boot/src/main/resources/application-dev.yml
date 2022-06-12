@@ -1,0 +1,21 @@
+transfer-service:
+  port: 8888
+  session:
+    keepalive-interval: 45
+  time-wheel:
+    keepalive-interval: 45
+    max-keepalive-interval: 120
+  cluster:
+    rabbit:
+      enable: true
+# 使用原生RabbitMQ的配置
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
+    template:
+      routing-key: websocket-transfer-routing-key
+      exchange: websocket-transfer-exchange
+      default-receive-queue: websocket-transfer-queue
