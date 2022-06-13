@@ -1,5 +1,8 @@
 package com.yijianguanzhu.transfer.server.codec;
 
+import com.yijianguanzhu.transfer.common.utils.ContextUtil;
+import com.yijianguanzhu.transfer.common.utils.SpringUtil;
+import com.yijianguanzhu.transfer.server.connector.AbstractConnector;
 import com.yijianguanzhu.transfer.server.enums.CmdEnum;
 import com.yijianguanzhu.transfer.server.enums.CodeEnum;
 import com.yijianguanzhu.transfer.common.message.Message;
@@ -8,7 +11,6 @@ import com.yijianguanzhu.transfer.common.message.wrapper.DecodeMessageWrapper;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.util.CharsetUtil;
 import io.netty.util.NetUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,15 +39,9 @@ public class ByteToMessageDecoder extends io.netty.handler.codec.ByteToMessageDe
 				log.error( "client({}) sent invalid binary data source",
 						NetUtil.toSocketAddressString( ( InetSocketAddress ) ctx.channel().remoteAddress() ), e );
 				// 关闭连接
-				ctx.writeAndFlush( AppMessage.builder()
-						.cmd( CmdEnum.ERROR )
-						.code( CodeEnum.ERR_BINARY_FRAME )
-						.build() );
-				ctx.writeAndFlush( AppMessage.builder()
-						.cmd( CmdEnum.CLOSE )
-						.code( CodeEnum.CLOSE )
-						.build() );
-				ctx.close();
+				AbstractConnector connector = SpringUtil.getBean( AbstractConnector.class );
+				connector.close( ContextUtil.getChannelSessionHook( ctx ), AppMessage.builder()
+						.cmd( CmdEnum.ERROR ).code( CodeEnum.ERR_BINARY_FRAME ).build() );
 				return;
 			}
 			out.add( msg );
