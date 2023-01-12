@@ -29,10 +29,10 @@
             <artifactId>icloud-smart-core-transfer-server</artifactId>
             <version>${icloud.smart.core.transfer.service.version}</version>
         </dependency>
-        <!-- RabbitMQ 依赖 -->
+        <!-- Spring Cloud Stream RabbitMQ 依赖 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
     </dependencies>
 </project>

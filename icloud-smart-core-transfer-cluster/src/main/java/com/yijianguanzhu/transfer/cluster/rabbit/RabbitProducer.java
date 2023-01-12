@@ -22,9 +22,11 @@ import org.springframework.context.annotation.Import;
  * 使用direct直连交换机通信模型，消息只会被投入到routingKey一致的队列中
  *
  * @author yijianguanzhu 2022年06月02日
+ * @see com.yijianguanzhu.transfer.cluster.stream.config.StreamAutoConfiguration
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
+@Deprecated
 @ConditionalOnProperty(name = "transfer-service.cluster.rabbit.enable", havingValue = "true")
 @Import(RabbitAutoConfiguration.class)
 class RabbitProducer implements ProducerProxy {

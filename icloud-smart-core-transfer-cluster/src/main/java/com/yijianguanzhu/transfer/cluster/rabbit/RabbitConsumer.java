@@ -22,9 +22,11 @@ import java.util.Objects;
 
 /**
  * @author yijianguanzhu 2022年06月02日
+ * @see com.yijianguanzhu.transfer.cluster.stream.config.StreamAutoConfiguration
  */
 @Slf4j
 @Component
+@Deprecated
 @ConditionalOnProperty(name = "transfer-service.cluster.rabbit.enable", havingValue = "true")
 class RabbitConsumer {
 

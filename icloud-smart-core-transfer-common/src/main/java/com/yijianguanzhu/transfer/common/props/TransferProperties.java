@@ -63,6 +63,7 @@ public class TransferProperties {
 
 	@Getter
 	@Setter
+	@Deprecated
 	public static class RabbitProperties {
 		// 是否启用rabbit
 		private boolean enable = false;

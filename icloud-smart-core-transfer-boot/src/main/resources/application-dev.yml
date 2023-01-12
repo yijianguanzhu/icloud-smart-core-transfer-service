@@ -5,17 +5,48 @@ transfer-service:
   time-wheel:
     keepalive-interval: 45
     max-keepalive-interval: 120
-  cluster:
-    rabbit:
-      enable: true
-# 使用原生RabbitMQ的配置
+#  cluster:
+#    rabbit:
+#      enable: false
 spring:
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: admin
-    password: admin
-    template:
-      routing-key: websocket-transfer-routing-key
-      exchange: websocket-transfer-exchange
-      default-receive-queue: websocket-transfer-queue
+  # 使用原生RabbitMQ的配置
+#  rabbitmq:
+#    host: 127.0.0.1
+#    port: 5672
+#    username: admin
+#    password: admin
+#    template:
+#      routing-key: websocket-transfer-routing-key
+#      exchange: websocket-transfer-exchange
+#      default-receive-queue: websocket-transfer-queue
+  # spring cloud stream 配置
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: websocket-transfer-exchange
+          # group: websocket-transfer-queue
+        output:
+          destination: websocket-transfer-exchange
+      default-binder: broker
+      binders:
+        broker:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 127.0.0.1
+                port: 5672
+                username: admin
+                password: admin
+      # 使用rabbitmq的额外属性
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              binding-routing-key: websocket-transfer-routing-key
+              exchange-type: direct
+          output:
+            producer:
+              routing-key-expression: '''websocket-transfer-routing-key'''
+              exchange-type: direct
